@@ -38,7 +38,7 @@ c = 299792458; %m/s
 % user-defined options
 Bin_width = 250e-9; % s
 deadtime = 22e-9;   % s
-profiles_per_histogram = 8000; % must match ProfilesPerHist recorded in the MCS files
+profiles_per_histogram = 16000; % must match ProfilesPerHist recorded in the MCS files
 
 %% 1.Load Data
 % load the data from the thorlabs controller
@@ -72,7 +72,7 @@ MCS.ChannelAssignment = RawData1.ChannelAssignment;
 MCS.Channel = [RawData1.Channel];
 
 % afterpulsing correction
-CR = (MCS.Data)/(Bin_width*2*profiles_per_histogram);
+CR = (MCS.Data)/(Bin_width*profiles_per_histogram);
 CF = 1./(1-deadtime*CR);
 MCS.Data = MCS.Data.*CF;
 
@@ -134,10 +134,10 @@ Wave.Power    = reshape(Wave.Power   , 5, num_rows)';
 Wave.Power_t  = reshape(Wave.Power_t , 5, num_rows)';
 
 % Take average of wave data
-Wave.Lambda   = mean(Wave.Lambda  ,2,'omitnan');
-Wave.Lambda_t = mean(Wave.Lambda_t,2,'omitnan');
-Wave.Power    = mean(Wave.Power   ,2,'omitnan');
-Wave.Power_t  = mean(Wave.Power_t ,2,'omitnan');
+Wave.Lambda   = mean(Wave.Lambda  ,2);
+Wave.Lambda_t = mean(Wave.Lambda_t,2);
+Wave.Power    = mean(Wave.Power   ,2);
+Wave.Power_t  = mean(Wave.Power_t ,2);
 
 % Sort the MCS data
 log0 = (MCS.Channel == 0); log0 = (MCS.Channel == 0); % MCS channels: 0 = blue, 1 = red, 2 = combined, 3 = molecular
