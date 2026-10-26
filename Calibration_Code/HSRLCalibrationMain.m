@@ -140,10 +140,10 @@ Wave.Power    = reshape(Wave.Power   , 5, num_rows)';
 Wave.Power_t  = reshape(Wave.Power_t , 5, num_rows)';
 
 % Take average of wave data
-Wave.Lambda   = mean(Wave.Lambda  ,2);
-Wave.Lambda_t = mean(Wave.Lambda_t,2);
-Wave.Power    = mean(Wave.Power   ,2);
-Wave.Power_t  = mean(Wave.Power_t ,2);
+Wave.Lambda   = mean(Wave.Lambda  ,2,'omitnan');
+Wave.Lambda_t = mean(Wave.Lambda_t,2,'omitnan');
+Wave.Power    = mean(Wave.Power   ,2,'omitnan');
+Wave.Power_t  = mean(Wave.Power_t ,2,'omitnan');
 
 % Sort the MCS data
 log0 = (MCS.Channel == 0); log0 = (MCS.Channel == 0); % MCS channels: 0 = blue, 1 = red, 2 = combined, 3 = molecular
